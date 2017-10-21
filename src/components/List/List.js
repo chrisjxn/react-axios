@@ -9,25 +9,28 @@ class List extends Component {
 
   render() {
     const {
-      customerList
+      customerList,
+      startNewCustomer,
+      selectCustomer
     } = this.props;
 
-    const CustomerComponents = customerList.map( customer => (
+    const CustomerComponents = customerList.map(customer => (
       <Customer
-        key={ customer.id }
-        id={ customer.id }
-        first={ customer.first }
-        last={ customer.last }
+        key={customer.id}
+        id={customer.id}
+        first={customer.first}
+        last={customer.last}
+        selectCustomer={selectCustomer}
       />
     ));
 
     return (
       <div id="List__container">
         {
-            <div id="List__namesContainer">
-              { CustomerComponents }
-              <CreateCustomer />
-            </div>
+          <div id="List__namesContainer">
+            {CustomerComponents}
+            <CreateCustomer startNewCustomer={startNewCustomer} />
+          </div>
         }
       </div>
     )

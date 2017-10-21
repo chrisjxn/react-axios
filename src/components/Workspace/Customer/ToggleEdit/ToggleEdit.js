@@ -9,9 +9,9 @@ export default class ToggleEdit extends Component {
       editing: false
     }
 
-    this.handleChange = this.handleChange.bind( this );
-    this.toggle = this.toggle.bind( this );
-    this.save = this.save.bind( this );
+    this.handleChange = this.handleChange.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.save = this.save.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +31,10 @@ export default class ToggleEdit extends Component {
   }
 
   save() {
-  
+    this.props.saveEdit(this.props.id, { [this.props.property]: this.state.val });
+    this.setState({
+      editing: false
+    });
   }
 
   render() {
@@ -42,35 +45,35 @@ export default class ToggleEdit extends Component {
       <div className="CustomerToggleEdit__container">
         {
           multi
-          ?
-            <textarea className="CustomerToggleEdit__textarea" disabled={ !editing } value={ val } onChange={ this.handleChange } />
-          :
-            <input className="CustomerToggleEdit__input" disabled={ !editing } placeholder={ description } value={ val } onChange={ this.handleChange } />
+            ?
+            <textarea className="CustomerToggleEdit__textarea" disabled={!editing} value={val} onChange={this.handleChange} />
+            :
+            <input className="CustomerToggleEdit__input" disabled={!editing} placeholder={description} value={val} onChange={this.handleChange} />
         }
         {
           editing
-          ?
-            multi
             ?
-              <button className="CustomerToggleEdit__editBtn" onClick={ this.toggle } style={ { position: 'relative', top: '-20px' } }> X </button>
-            :
-              <button className="CustomerToggleEdit__editBtn" onClick={ this.toggle }> X </button>
-          :
             multi
-            ?
-              <button className="CustomerToggleEdit__editBtn" onClick={ this.toggle } style={ { position: 'relative', top: '-20px' } }>Edit</button>
+              ?
+              <button className="CustomerToggleEdit__editBtn" onClick={this.toggle} style={{ position: 'relative', top: '-20px' }}> X </button>
+              :
+              <button className="CustomerToggleEdit__editBtn" onClick={this.toggle}> X </button>
             :
-              <button className="CustomerToggleEdit__editBtn" onClick={ this.toggle }>Edit</button>
+            multi
+              ?
+              <button className="CustomerToggleEdit__editBtn" onClick={this.toggle} style={{ position: 'relative', top: '-20px' }}>Edit</button>
+              :
+              <button className="CustomerToggleEdit__editBtn" onClick={this.toggle}>Edit</button>
         }
         {
           editing
-          ?
-            multi
             ?
-              <button className="CustomerToggleEdit__saveBtn" onClick={ this.save } style={ { position: 'relative', top: '-20px' } }>Save</button>
+            multi
+              ?
+              <button className="CustomerToggleEdit__saveBtn" onClick={this.save} style={{ position: 'relative', top: '-20px' }}>Save</button>
+              :
+              <button className="CustomerToggleEdit__saveBtn" onClick={this.save}>Save</button>
             :
-              <button className="CustomerToggleEdit__saveBtn" onClick={ this.save }>Save</button>
-          :
             null
         }
       </div>
